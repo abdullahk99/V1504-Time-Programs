@@ -1,0 +1,1102 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1561\cocoasubrtf200
+{\fonttbl\f0\fmodern\fcharset0 CourierNewPSMT;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;}
+\margl1440\margr1440\vieww25400\viewh16000\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs28 \cf2 \cb3 \expnd0\expndtw0\kerning0
+|----------------------------------- Document consists of programs associated with product timing stats and features for V-1504 ------------\
+|------------------------------------------- Programs written with respect to timings updated last on May 28, 2018 -------------------------\
+\
+|----------------------------------------- Document has been revised and returned by Alexandre Bertrand on the date bellow\
+|----------------------------------------------------------- Document last update date: June 05, 2018 -------------------------------------\
+\
+\
+\
+\
+\
+\
+\
+|------------------------------------------------------------------- Conveyor (sum 1-5)\
+\
+\
+|----- COP Summation \
+\
+double sum1 global\
+sum1 = 0\
+\
+double sum1 global\
+validate = false\
+\
+if [braille] <> "no" or val([stops]) = 4 or [model] = "m1504" or [pbsize] <> "std" or [twodoor] = "yesi" then   \
+	validate = true\
+	sum1 = 90 + sum1\
+else\
+	validate = true\
+	sum1 = 10 + sum1\
+endif\
+\
+\
+|----- Ventilation Fan\
+\
+double sum3 global\
+sum3 = 0\
+\
+double sum3 global\
+validate = false\
+\
+if [fan] = "yes24" then\
+	sum3 = sum3 + 5\
+	validate = true\
+endif\
+\
+\
+|----- Wifi live diagnostic \
+\
+double sum1 global\
+sum1 = 0\
+\
+double sum1 global\
+validate = false\
+\
+if [wifi] = "yes" then\
+	validate = true\
+	sum1 = sum1 + 20\
+endif\
+\
+\
+|----- Heater Blanket Req'd\
+\
+double sum1 global\
+sum1 = 0\
+\
+double sum1 global\
+validate = false\
+\
+if [tankheat] = "yes" then\
+	validate = true\
+	sum1 = sum1 + 35\
+endif\
+\
+\
+\
+|------------------------------------------------------------------- Electrical (sum 6-8)\
+\
+\
+|----- Hall Call Mounting.Lev 1 (includes the time for all parts such as btns, box, key, light, alarm, emergency stop... etc)\
+\
+double sum6 global\
+sum6 = 0\
+\
+double sum6 global\
+validate = false\
+\
+if [hcmnt1] is \{"flsh","surf","remote"\} then\
+	validate = true\
+	sum6 = sum6 + 5\
+endif \
+\
+\
+|----- Hall Call Mounting.Lev 2\
+\
+double sum6 global\
+sum6 = 0\
+\
+double sum6 global\
+validate = false\
+\
+if [hcmnt2] is \{"flsh","surf","remote"\} then\
+	validate = true\
+	sum6 = sum6 + 5\
+endif\
+\
+\
+|----- Hall Call Mounting.Lev 3\
+\
+double sum6 global\
+sum6 = 0\
+\
+double sum6 global\
+validate = false\
+\
+if [hcmnt3] is \{"flsh","surf","remote"\} then\
+	validate = true\
+	sum6 = sum6 + 5\
+endif \
+\
+\
+|----- Hall Call Mounting.Lev 4\
+\
+double sum6 global\
+sum6 = 0\
+\
+double sum6 global\
+validate = false\
+\
+if [hcmnt4] is \{"flsh","surf","remote"\} then\
+	validate = true\
+	sum6 = sum6 + 5\
+endif\
+\
+\
+|----- Phone\
+\
+double sum6 global\
+sum6 = 0\
+\
+double sum6 global\
+validate = false\
+\
+if [phoneplg] = "yes" then\
+	validate = true\
+	sum6 = sum6 + 3\
+endif\
+\
+\
+|----- Temp. Run Button\
+\
+double sum1 global\
+sum1 = 0\
+\
+double sum1 global\
+validate = false\
+\
+if [tmprun] = "remote" then\
+	validate = true\
+	sum1 = sum1 + 30\
+endif \
+\
+\
+|------------------------------------------------------------------- Heavy Parts (sum 9-11)\
+\
+|----- Ramp Required\
+\
+double sum9 global\
+sum9 = 0\
+\
+double sum9 global\
+validate = false\
+\
+if [ramp] = "12:1" then\
+	validate = true\
+	sum9 = sum9 + 10\
+endif\
+if [ramp] is \{"foldup", "sfoldup"\} then\
+	validate = true\
+	sum9 = sum9 + 20\
+endif\
+\
+\
+|----- U Bracket\
+\
+double sum9 global\
+sum9 = 0\
+\
+double sum9 global\
+validate = false\
+\
+if [ubkt] = "ubys" then\
+	validate = true\
+	sum9 = sum9 + 15\
+endif\
+\
+\
+|----- Small Access Ramp (Bridge)\
+\
+double sum9 global\
+sum9 = 0\
+\
+double sum9 global\
+validate = false\
+\
+\
+if [bridge] = "one" then\
+	validate = true\
+	sum9 = sum9 + 5\
+endif\
+if [bridge] = "two" then\
+	validate = true\
+	sum9 = sum9 + 10\
+endif\
+if [bridge] = "three" then\
+	validate = true\
+	sum9 = sum9 + 15\
+endif\
+if [bridge] = "four" then\
+	validate = true\
+	sum9 = sum9 + 20\
+endif\
+\
+\
+|-----  Hall Call Post --------\
+\
+double sum9 global\
+sum15 = 0\
+\
+double sum9 global\
+\
+if val([hcpost]) <> 0 then\
+	run = (val([hcpost]) * 10)\
+endif\
+\
+\
+|----- Support Base\
+\
+double sum9 global\
+sum9 = 0\
+\
+double sum9 global\
+validate = false\
+\
+if [basetyp] is \{"std", "both"\} then\
+	validate = true\
+	sum9 = sum9 + 20\
+endif\
+\
+\
+|----- Triangular Bracket\
+\
+double sum9 global\
+sum9 = 0\
+\
+double sum9 global\
+validate = false\
+\
+if [tribkt] = "tribys" then\
+	validate = true\
+	sum9 = sum9 + 5\
+endif\
+\
+\
+|----- Enclosure Extension\
+\
+double gl_towextqty global\
+double gl_servpanqty global\
+double temp_var global\
+double sum9 global\
+validate = false\
+\
+temp_var = 0\
+\
+if gl_towextqty > 0 then\
+	validate = true\
+	temp_var = temp_var + (15 * gl_towextqty)\
+endif\
+if val(gl_servpanqty) > 0 then\
+	validate = true\
+	temp_var = temp_var + (val(gl_servpanqty) * 2)\
+endif\
+\
+sum9 = sum9 + temp_var\
+\
+\
+double gl_towextqty global\
+double gl_servpanqty global\
+double temp_var global\
+double sum9 global\
+\
+temp_var = 0\
+\
+if gl_towextqty > 0 then\
+	temp_var = temp_var + (15 * gl_towextqty)\
+endif\
+if val(gl_servpanqty) > 0 then\
+	temp_var = temp_var + (val(gl_servpanqty) * 2)\
+endif\
+\
+run = temp_var\
+\
+\
+|----- return Walls (For Wing Walls)\
+\
+double sum9 global\
+sum9 = 0\
+\
+double sum9 global\
+validate = false\
+\
+if [returnw] = "yes" then\
+	validate = true\
+	sum9 = sum9 + 5\
+endif 		\
+\
+\
+|----- Back Panel Required\
+\
+double sum9 global\
+sum9 = 0\
+\
+double sum9 global\
+validate = false\
+\
+if [towerpan] = "yes" then\
+	validate = false\
+	sum9 = sum9 + 2\
+endif\
+\
+\
+|------------------------------------------------------------------- Doors (sum 12-14)\
+\
+|----- China and In-House Door Type (Lev. 1)\
+\
+double sum12 global\
+validate = false\
+\
+if [door1] = "firepro" and ([lock1] = "prom" and [ext1] <> "yes") then    |-- firepro from CHINA\
+	validate = true\
+	sum12 = sum12 + 60\
+endif\
+if [door1] = "firepro" and ([lock1] <> "prom" or [ext1] = "yes") then	  |-- firepro in house\
+	validate = true	\
+	sum12 = sum12 + 300\
+endif\
+if [door1] = "pfgate" and (val([cuswd1]) = 36 and [lock1] = "sick") then  |-- pfgate from CHINA\
+	validate = true\
+	sum12 = sum12 + 40\
+endif\
+if [door1] = "pfgate" and (val([cuswd1]) <> 36 or [lock1] <> "sick") then |-- pfgate in house\
+	validate = true\
+	sum12 = sum12 + 180\
+endif\
+if val([door1]) = 42 and val([cuswd1]) = 36 then			  |--  42" High Upper Lndg Gate from CHINA\
+	validate = true\
+	sum12 = sum12 + 45\
+endif\
+if val([door1]) = 42 and val([cuswd1]) <> 36 then			  |-- 42" High Upper Lndg Gate in house\
+	validate = true\
+	sum12 = sum12 + 120\
+endif\
+if [door1] = "encl" then\
+	validate = true\
+	sum12 = sum12 + 180						  |--  Enclosure 80" Door or 42" Gate\
+endif\
+if [door1] = "wooden" and [vision] = "yes" then			          |--  Wooden Door (No Design+Vision Panel (Flush)) \
+	validate = true\
+	sum12 = sum12 + 30\
+endif\
+if [door1] = "wooden" and [vision] <> "yes" then	 		  |--  Wooden Door  \
+	validate = true\
+	sum12 = sum12 + 60\
+endif    \
+\
+\
+|----- China and In-House Door Type (Lev. 2)\
+\
+double sum12 global\
+validate = false\
+\
+if [door2] = "firepro" and ([lock2] = "prom" and [ext2] <> "yes") then    |-- firepro from CHINA\
+	validate = true\
+	sum12 = sum12 + 60\
+endif\
+if [door2] = "firepro" and ([lock2] <> "prom" or [ext2] = "yes") then	  |-- firepro in house\
+	validate = true	\
+	sum12 = sum12 + 300\
+endif\
+if [door2] = "pfgate" and (val([cuswd2]) = 36 and [lock2] = "sick") then  |-- pfgate from CHINA\
+	validate = true\
+	sum12 = sum12 + 40\
+endif\
+if [door2] = "pfgate" and (val([cuswd2]) <> 36 or [lock2] <> "sick") then |-- pfgate in house\
+	validate = true\
+	sum12 = sum12 + 180\
+endif\
+if val([door2]) = 42 and val([cuswd2]) = 36 then			  |--  42" High Upper Lndg Gate from CHINA\
+	validate = true\
+	sum12 = sum12 + 45\
+endif\
+if val([door2]) = 42 and val([cuswd2]) <> 36 then			  |-- 42" High Upper Lndg Gate in house\
+	validate = true\
+	sum12 = sum12 + 120\
+endif\
+if [door2] = "encl" then\
+	validate = true\
+	sum12 = sum12 + 180						  |--  Enclosure 80" Door or 42" Gate\
+endif\
+if [door2] = "wooden" and [vision] = "yes" then			          |--  Wooden Door (No Design+Vision Panel (Flush)) \
+	validate = true\
+	sum12 = sum12 + 30\
+endif\
+if [door2] = "wooden" and [vision] <> "yes" then	 		  |--  Wooden Door  \
+	validate = true\
+	sum12 = sum12 + 60\
+endif     \
+\
+\
+|----- China and In-House Door Type (Lev. 3)\
+\
+double sum12 global\
+validate = false\
+\
+if [door3] = "firepro" and ([lock3] = "prom" and [ext3] <> "yes") then    |-- firepro from CHINA\
+	validate = true\
+	sum12 = sum12 + 60\
+endif\
+if [door3] = "firepro" and ([lock3] <> "prom" or [ext3] = "yes") then	  |-- firepro in house\
+	validate = true	\
+	sum12 = sum12 + 300\
+endif\
+if [door3] = "pfgate" and (val([cuswd3]) = 36 and [lock3] = "sick") then  |-- pfgate from CHINA\
+	validate = true\
+	sum12 = sum12 + 40\
+endif\
+if [door3] = "pfgate" and (val([cuswd3]) <> 36 or [lock3] <> "sick") then |-- pfgate in house\
+	validate = true\
+	sum12 = sum12 + 180\
+endif\
+if val([door3]) = 42 and val([cuswd3]) = 36 then			  |--  42" High Upper Lndg Gate from CHINA\
+	validate = true\
+	sum12 = sum12 + 45\
+endif\
+if val([door3]) = 42 and val([cuswd3]) <> 36 then			  |-- 42" High Upper Lndg Gate in house\
+	validate = true\
+	sum12 = sum12 + 120\
+endif\
+if [door3] = "encl" then\
+	validate = true\
+	sum12 = sum12 + 180						  |--  Enclosure 80" Door or 42" Gate\
+endif\
+if [door3] = "wooden" and [vision] = "yes" then			          |--  Wooden Door (No Design+Vision Panel (Flush)) \
+	validate = true\
+	sum12 = sum12 + 30\
+endif\
+if [door3] = "wooden" and [vision] <> "yes" then	 		  |--  Wooden Door  \
+	validate = true\
+	sum12 = sum12 + 60\
+endif \
+\
+|----- China and In-House Door Type (Lev. 4)\
+\
+double sum12 global\
+validate = false\
+\
+if [door4] = "firepro" and ([lock4] = "prom" and [ext4] <> "yes") then    |-- firepro from CHINA\
+	validate = true\
+	sum12 = sum12 + 60\
+endif\
+if [door4] = "firepro" and ([lock4] <> "prom" or [ext4] = "yes") then	  |-- firepro in house\
+	validate = true	\
+	sum12 = sum12 + 300\
+endif\
+if [door4] = "pfgate" and (val([cuswd4]) = 36 and [lock4] = "sick") then  |-- pfgate from CHINA\
+	validate = true\
+	sum12 = sum12 + 40\
+endif\
+if [door4] = "pfgate" and (val([cuswd4]) <> 36 or [lock4] <> "sick") then |-- pfgate in house\
+	validate = true\
+	sum12 = sum12 + 180\
+endif\
+if val([door4]) = 42 and val([cuswd4]) = 36 then			  |--  42" High Upper Lndg Gate from CHINA\
+	validate = true\
+	sum12 = sum12 + 45\
+endif\
+if val([door4]) = 42 and val([cuswd4]) <> 36 then			  |-- 42" High Upper Lndg Gate in house\
+	validate = true\
+	sum12 = sum12 + 120\
+endif\
+if [door4] = "encl" then\
+	validate = true\
+	sum12 = sum12 + 180						  |--  Enclosure 80" Door or 42" Gate\
+endif\
+if [door4] = "wooden" and [vision] = "yes" then			          |--  Wooden Door (No Design+Vision Panel (Flush)) \
+	validate = true\
+	sum12 = sum12 + 30\
+endif\
+if [door4] = "wooden" and [vision] <> "yes" then	 		  |--  Wooden Door  \
+	validate = true\
+	sum12 = sum12 + 60\
+endif \
+\
+\
+|----- Auto Oprtr Lev.1\
+\
+double sum12 global\
+double temp global\
+validate = false\
+\
+temp = 0\
+\
+if ([door1] = "firepro" and ([lock1] = "prom" and [ext1] <> "yes")) \
+    and [autop1] = "proII" then\
+	validate = true\
+	temp = temp + 60\
+else\
+	if [autop1] is \{"comd", "dura", "gtkeep", "proII"\} then\
+		validate = true\
+		temp = temp + 0\
+	endif\
+endif\
+\
+sum12 = sum12 + temp\
+\
+\
+\
+double sum12 global\
+double temp global\
+\
+temp = 0\
+\
+if ([door1] = "firepro" and ([lock1] = "prom" and [ext1] <> "yes")) \
+    and [autop1] = "proII" then\
+	temp = temp + 60\
+else\
+	if [autop1] is \{"comd", "dura", "gtkeep", "proII"\} then\
+		temp = temp + 0\
+	endif\
+endif\
+\
+run = temp\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+|----- Auto Oprtr Lev.2\
+\
+double sum12 global\
+double temp global\
+validate = false\
+\
+temp = 0\
+\
+if ([door2] = "firepro" and ([lock2] = "prom" and [ext2] <> "yes")) \
+    and [autop2] = "proII" then\
+	validate = true\
+	temp = temp + 60\
+else\
+	if [autop2] is \{"comd", "dura", "gtkeep", "proII"\} then\
+		validate = true\
+		temp = temp + 0\
+	endif\
+endif\
+\
+sum12 = sum12 + temp\
+\
+\
+double sum12 global\
+double temp global\
+\
+temp = 0\
+\
+if ([door2] = "firepro" and ([lock2] = "prom" and [ext2] <> "yes")) \
+    and [autop2] = "proII" then\
+	temp = temp + 60\
+else\
+	if [autop2] is \{"comd", "dura", "gtkeep", "proII"\} then\
+		temp = temp + 0\
+	endif\
+endif\
+\
+run = temp\
+\
+\
+\
+\
+|----- Auto Oprtr Lev.3\
+\
+double sum12 global\
+double temp global\
+validate = false\
+\
+temp = 0\
+\
+if ([door3] = "firepro" and ([lock3] = "prom" and [ext3] <> "yes")) \
+    and [autop3] = "proII" then\
+	validate = true\
+	temp = temp + 60\
+else\
+	if [autop3] is \{"comd", "dura", "gtkeep", "proII"\} then\
+		validate = true\
+		temp = temp + 0\
+	endif\
+endif\
+\
+sum12 = sum12 + temp\
+\
+\
+double sum12 global\
+double temp global\
+\
+temp = 0\
+\
+if ([door3] = "firepro" and ([lock3] = "prom" and [ext3] <> "yes")) \
+    and [autop3] = "proII" then\
+	temp = temp + 60\
+else\
+	if [autop3] is \{"comd", "dura", "gtkeep", "proII"\} then\
+		temp = temp + 0\
+	endif\
+endif\
+\
+rum = temp\
+\
+\
+\
+\
+|----- Auto Oprtr Lev.4\
+\
+\
+double sum12 global\
+double temp global\
+validate = false\
+\
+temp = 0\
+\
+if ([door4] = "firepro" and ([lock4] = "prom" and [ext4] <> "yes")) \
+    and [autop4] = "proII" then\
+	validate = true\
+	temp = temp + 60\
+else\
+	if [autop4] is \{"comd", "dura", "gtkeep", "proII"\} then\
+		validate = true\
+		temp = temp + 0\
+	endif\
+endif\
+\
+sum12 = sum12 + temp\
+\
+\
+double sum12 global\
+double temp global\
+\
+temp = 0\
+\
+if ([door4] = "firepro" and ([lock4] = "prom" and [ext4] <> "yes")) \
+    and [autop4] = "proII" then\
+	temp = temp + 60\
+else\
+	if [autop4] is \{"comd", "dura", "gtkeep", "proII"\} then\
+		temp = temp + 0\
+	endif\
+endif\
+\
+run = temp\
+\
+\
+\
+\
+|-----  Fascia             \
+\
+double sum12 global\
+sum12 = 0 \
+\
+double sum12 global\
+validate = false\
+\
+if [fascia] = "yes" then\
+	validate = true\
+	sum12 = sum12 + 30\
+endif\
+\
+\
+|------ Split Shipment Doors\
+\
+double sum12 global\
+sum12 = 0\
+\
+double sum12 global\
+validate = false\
+\
+if [splitsdr] = "yes" then\
+	validate = true\
+	sum12 = 0\
+endif\
+\
+\
+|----- Filler Panel Entrance/Rear Kit\
+\
+double sum12 global\
+sum12 = 0\
+\
+double sum12 global\
+validate = false\
+\
+if [model] is \{"lux", "prestige", "v1504P"\} and [flpnlent] = "yes" then\
+	validate = true\
+	sum12 = sum12 + 25\
+endif\
+\
+\
+|------------------------------------------------------------------- Small Parts (sum 15-17)\
+\
+\
+|---------- Small Parts (Global)\
+\
+double sum15 global\
+sum15 = 0\
+\
+double sum15 global\
+validate = true\
+\
+sum15 = sum15 + 45\
+\
+\
+|----- Extra Keys\
+\
+double sum15 global\
+sum15 = 0\
+\
+double sum15 global\
+validate = false\
+\
+if val([keys]) > 0 then\
+	validate = true\
+	sum15 = sum15 + 5\
+endif\
+\
+\
+|----- Flood Switch Required\
+\
+double sum15 global\
+sum15 = 0\
+\
+double sum15 global\
+validate = false\
+\
+if [floodsw] = "yes" then\
+	validate = true\
+	sum15 = sum15 + 5\
+endif\
+\
+\
+|------------------------------------------------------------------- Wood (sum 18-20)\
+\
+\
+\
+\
+|------------------------------------------------------------------- Enclosure (sum 40-42)\
+\
+\
+|------- Enclosure (Global)\
+\
+double sum40 global\
+sum40 = 0\
+\
+double sum40 global\
+validate = false\
+\
+sum40 = sum40 + 180\
+\
+\
+|------ Encloser Model\
+\
+double sum40 global\
+sum40 = 0\
+\
+double sum40 global\
+validate = false\
+\
+if [enclmodl] = "3wall" then\
+	validate = true\
+	sum40 = sum40 + 180\
+endif\
+\
+\
+|----  Adjustable Sill Enclosure \
+\
+double sum40 global\
+sum40 = 0\
+\
+double sum40 global\
+validate = false\
+\
+if [adjsill] = "yes" then\
+	validate = true\
+	sum40 = sum40 + 5\
+endif\
+\
+\
+|----- Plexiglass Dome\
+\
+double sum40 global\
+sum40 = 0\
+\
+double sum40 global\
+validate = false\
+\
+if [plexdome] = "yes" then\
+	validate = true\
+	sum40 = sum40 + 120\
+endif\
+\
+\
+|----- Filler Panel Entrance/Rear Kit\
+\
+double sum40 global\
+sum40 = 0\
+\
+double sum40 global\
+validate = false\
+\
+if [model] = "encvp" and [flpnlent] = "yes" then\
+	validate = true\
+	sum40 = sum40 + 25\
+endif\
+\
+\
+|----- Pitch Sloped Roof\
+\
+double sum40 global\
+sum40 = 0\
+\
+double sum40 global\
+validate = false\
+\
+if [roofptch] = "yes" then\
+	validate = true\
+	sum40 = sum40 + 180\
+endif\
+	\
+\
+|------------------------------------------------------------------- CAB (sum 24-26)\
+\
+|----- Cab Type\
+\
+double sum24 global\
+sum24 = 0 \
+\
+\
+double sum24 global\
+validate = false\
+\
+if [cab] = "type-1" then\
+	validate = true\
+	sum24 = sum24 + 24\
+endif\
+if [cab] = "type-2" then\
+	validate = true\
+	sum24 = sum24 + 20\
+endif\
+if [cab] is \{"type-3","type-4"\} then\
+	validate = true\
+	sum24 = sum24 + 60\
+endif\
+if [cab] is \{"type-5","type-6"\} then\
+	validate = true\
+	sum24 = sum24 + 45\
+endif\
+\
+\
+|----- Cab Floor Type\
+\
+double sum24 global\
+sum24 = 0\
+\
+double sum24 global\
+validate = false\
+\
+if [doors] = "yes" then\
+	validate = true\
+	sum24 = sum24 + 30\
+endif\
+\
+\
+|----- Floor Touch Up Paint\
+\
+double sum24 global\
+sum24 = 0\
+\
+double sum24 global\
+validate = false\
+\
+if [floorp] = "one" then\
+	validate = true \
+	sum24 = sum24 + 1\
+endif\
+\
+\
+|----- Cab Height (Wall)\
+\
+double sum24 global\
+sum24 = 0\
+\
+double sum24 global\
+validate = false\
+\
+if val([height]) is \{54,80\} then\
+	validate = true\
+	sum24 = sum24 + 60\
+endif\
+\
+\
+|----- Handrail\
+\
+double sum24 global\
+sum24 = 0\
+\
+double sum24 global\
+validate = false\
+\
+if [xhandrl] = "move" then\
+	validate = true\
+	sum24 = sum24 + 3\
+endif\
+if [xhandrl] = "extra" then\
+	validate = true\
+	sum24 = sum24 + 6\
+endif\
+\
+\
+|----- Fold up Seat\
+\
+double sum24 global\
+sum24 = 0\
+\
+double sum24 = 0\
+validate = false\
+\
+if [foldseat] is \{"yes", "yesp"\} then\
+	validate = true\
+	sum24 = sum24 + 30\
+endif\
+\
+\
+|----- Light Screen Location\
+\
+double sum24 global\
+sum24 = 0\
+\
+double sum24 global\
+validate = false\
+\
+if [lightloc] is \{"a","b","c"\} then\
+	validate = true\
+	sum24 = sum24 + 30 \
+endif\
+if [lightloc] is \{"ab","ac","bc"\} then\
+	validate = true\
+	sum24 = sum24 + 60\
+endif \
+\
+\
+|----- Door Toe Guard \
+\
+double sum24 global\
+sum24 = 0\
+\
+double sum24 global\
+validate = false\
+\
+if [toeguard] = "one" then\
+	validate = true\
+	sum24 = sum24 + 2\
+endif\
+if [toeguard] = "two" then\
+	validate = true\
+	sum24 = sum24 + 4\
+endif\
+if [toeguard] = "three" then\
+	validate = true\
+	sum24 = sum24 + 6\
+endif\
+if [toeguard] = "four" then\
+	validate = true\
+	sum24 = sum24 + 8\
+endif\
+\
+\
+|----- Underpan Sensor Required\
+\
+double sum24 global\
+sum24 = 0\
+\
+double sum24 global\
+validate = false\
+\
+if [underpan] = "yes" then\
+	validate = true\
+	sum24 = sum24 + 45\
+endif\
+\
+\
+|--------------------------------------------------------------------- Packaging (sum 27-29)\
+\
+\
+|------- Packaging (Global)\
+\
+double sum27 global\
+sum27 = 0\
+\
+double sum27 global\
+validate = tru\
+\
+sum27 = sum27 + 40\
+\
+\
+|----- Support Base\
+\
+double sum27 global\
+sum27 = 0\
+\
+double sum27 global\
+validate = false\
+\
+if [basetyp] is \{"back", "both"\} then\
+	validate = true\
+	sum27 = sum27 + 30\
+endif\
+\
+\
+|---------------------------------------------------------------------- Ceiling Assembly (sum 30-32)\
+\
+\
+|-----  Ceiling Selection\
+\
+double sum30 global\
+sum30 = 0\
+\
+double sum30 global\
+validate = false\
+\
+if [ceiling] = "lux" then\
+	validate = true\
+	sum30 = sum30 + 45\
+endif\
+\
+\
+|------------------------------------------------------------------------ Parts Department (sum 33-35)\
+\
+|----- Trip Saver Kit\
+\
+double sum33 global\
+sum33 = 0\
+\
+double sum33 global\
+validate = false\
+\
+if [tripsav] = "yes" then\
+	validate = true\
+	sum33 = sum33 + 20\
+endif\
+\
+|------------------------------------------------------------------------ Tower (sum 36-38)\
+\
+|----- Short and Long Towers\
+\
+double sum36 global\
+validate = false\
+\
+if val([travel]) < 140 then\
+	validate = true\
+	sum36 = sum36 + 90\
+else\
+	validate = true\
+	sum36 = sum36 + 120\
+endif\
+\
+\
+\
+double sum36 global\
+\
+if val([travel]) < 140 then\
+	run = 90\
+else\
+	run = 120\
+endif}
